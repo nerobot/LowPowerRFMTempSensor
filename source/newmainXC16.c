@@ -22,16 +22,16 @@ typedef enum {
     TEST_STATION_2_ID
 } id_t;
 
-#define NETWORKID     0   					// Must be the same for all nodes
-#define MYNODEID      TEST_STATION_2_ID   	// My node ID
-#define TONODEID      GATEWAY_ID 			// Destination node ID
+#define NETWORKID       0                           // Must be the same for all nodes
+#define MYNODEID        TEST_STATION_2_ID           // My node ID
+#define TONODEID        GATEWAY_ID                  // Destination node ID
 
 // RFM69 frequency, uncomment the frequency of your module:
-#define FREQUENCY   RF69_433MHZ
+#define FREQUENCY       RF69_433MHZ
 
 // AES encryption (or not):
-#define ENCRYPT       true // Set to "true" to use encryption
-#define ENCRYPTKEY    "TOPSECRETPASSWRD" // Use the same 16-byte key on all nodes
+#define ENCRYPT         true                        // Set to "true" to use encryption
+#define ENCRYPTKEY      "TOPSECRETPASSWRD"          // Use the same 16-byte key on all nodes
 
 void portDelay(){
     Nop();
@@ -42,27 +42,32 @@ void portDelay(){
 
 int main(void) {
     
-    // Setting up uart1
+    // Setting up UART1 module
     initU1();
     putU1("Program starting up.\n\r");       
     
+    // Setting up SPI1 module
     putU1S("Init SPI module\n\r");
     spiInit(SPI_MODE0);
     
+    // Setting up the RFM69 module
     RFM69(0,0,0);
     putU1S("RFM69 Initialised 1\n\r");
     while (!RFM69Initialize(FREQUENCY, MYNODEID, NETWORKID)){}
     encrypt(ENCRYPTKEY);
     putU1S("RFM69 Initialised 2\n\r");
 
+    // Setting up the I2C module
     i2c_init();
     
+    // Setting up the MCP module
     while(!initMCP()){
         putU1S("MCP setup fail.\n\r");
     }
     putU1S("MCP Set and ready to go.\n\r");
     
     while(1){
+        // Obtaining the temperature from the MCP module. First wake it up, then obtain temperature, then put it back to sleep.
         mcpWake();
         putU1S("Obtaining MCP temperature\n\r");        
         uint16_t T = readTemp();
