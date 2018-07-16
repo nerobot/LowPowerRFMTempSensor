@@ -8,8 +8,6 @@
 #ifndef MCP9808_H
 #define	MCP9808_H
 
-#define FCY                             XTAL_FREQ / 2       // Most but not all PIC24s
-
 #include <xc.h> // include processor files - each processor file is guarded.
 #include "I2Clib.h"
 #include <libpic30.h>
