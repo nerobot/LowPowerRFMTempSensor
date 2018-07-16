@@ -74,3 +74,26 @@ int main(void) {
     
     return 0;
 }
+
+
+/*! @mainpage
+ * 
+ * @author Steven Daglish
+ * 
+ * @date 16 July 2018
+ * 
+ * @version 0.1
+ * 
+ * @section secOverview Overview
+ * 
+ * Low power RFM temperature sensor to be used in remote weather station (that will be left after moving house).
+ *  
+ * @section secHistory History
+ * 
+ *  # 16 July 2018
+ *
+ *  * RTCC has been tested and it does appear to be working well.
+ *  * The I2C MCP module is setup and working well.
+ *  * I am now starting the implementation of the SPI / RFM69 interface. This has not been tested yet.
+ * 
+ */
