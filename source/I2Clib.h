@@ -58,8 +58,23 @@ bool i2c_send_byte_data( uint8_t address,
 uint8_t i2c_receive_byte_data( uint8_t address,
                                uint8_t reg );
 
+/**
+ * Reads a 16bit values from the I2C module.
+ * 
+ * @param address   8bit address of the I2C devices
+ * @param reg       8bit register that the function will write to.
+ * @return          The 16bit data from the I2C device
+ */
 uint16_t i2c_receive_16bit_data(uint8_t address, uint8_t reg);
 
+/**
+ * Writes 16bit word to the I2C module.
+ * 
+ * @param address   8bit address of the I2C device
+ * @param reg       8bit register that the 16bit work is to be read from on the I2C device
+ * @param data      16bit data to be written to the I2C device
+ * @return          Success / failure to send the data.
+ */
 bool i2c_write_16bit_data(uint8_t address, uint8_t reg, uint16_t data);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
