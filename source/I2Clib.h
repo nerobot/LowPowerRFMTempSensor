@@ -1,3 +1,10 @@
+/* 
+ * File:   I2Clib.h
+ * Author: stevend
+ *
+ * Created on July 10, 2018, 8:59 PM
+ */
+
 #ifndef I2CLIB_H
 #define	I2CLIB_H
 

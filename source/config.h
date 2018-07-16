@@ -1,6 +1,6 @@
 /* 
  * File:   config.h
- * Author: scdag
+ * Author: stevend
  *
  * Created on July 10, 2018, 8:59 PM
  */

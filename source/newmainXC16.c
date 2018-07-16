@@ -1,6 +1,6 @@
 /*
  * File:   newmainXC16.c
- * Author: scdag
+ * Author: stevend
  *
  * Created on 16 July 2018
  */

@@ -1,6 +1,6 @@
 /* 
  * File:   RFM69.h
- * Author: scdag
+ * Author: stevend
  *
  * Created on 25 May 2018, 18:39
  */
