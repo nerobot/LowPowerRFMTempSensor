@@ -4,7 +4,6 @@
  *
  * Created on 10 July 2018, 20:55
  */
-//#define DEBUG
 
 #include "PIC24FJ64GA202.h"
 #include "xc.h"
@@ -28,16 +27,11 @@ typedef enum {
 #define TONODEID      GATEWAY_ID 			// Destination node ID
 
 // RFM69 frequency, uncomment the frequency of your module:
-
 #define FREQUENCY   RF69_433MHZ
 
 // AES encryption (or not):
-
 #define ENCRYPT       true // Set to "true" to use encryption
 #define ENCRYPTKEY    "TOPSECRETPASSWRD" // Use the same 16-byte key on all nodes
-
-//#define LED LATBbits.LATB6
-//#define TRIS_LED TRISBbits.TRISB6
 
 void portDelay(){
     Nop();
@@ -46,34 +40,11 @@ void portDelay(){
     Nop();
 }
 
-/*void delay(){
-    int i = 0;
-    int j = 0;
-    for (i=0; i<1000; i++){
-        for (j=0; j<1000; j++){
-            Nop();
-        }        
-    }
-}*/
-
-
-INT second = 0;
-INT minute = 0;
-INT hour = 0;
-
 int main(void) {
     
     // Setting up uart1
     initU1();
-    putU1("Program starting up.\n\r");
-    
-    putU1S("Setting up I2C\n\r");
-    i2c_init();
-    
-    putU1S("Setting up MCP\n\r");
-    while(!initMCP()){
-    putU1S("MCP setup fail.\n\r");}   
-    
+    putU1("Program starting up.\n\r");       
     
     putU1S("Init SPI module\n\r");
     spiInit(SPI_MODE0);
@@ -82,16 +53,21 @@ int main(void) {
     putU1S("RFM69 Initialised 1\n\r");
     while (!RFM69Initialize(FREQUENCY, MYNODEID, NETWORKID)){}
     encrypt(ENCRYPTKEY);
-    putU1S("RFM69 Initlaised 2\n\r");
+    putU1S("RFM69 Initialised 2\n\r");
 
-
+    i2c_init();
+    
+    while(!initMCP()){
+        putU1S("MCP setup fail.\n\r");
+    }
+    putU1S("MCP Set and ready to go.\n\r");
     
     while(1){
         mcpWake();
-       // putU1S("Obtaining MCP temperature\n\r");        
+        putU1S("Obtaining MCP temperature\n\r");        
         uint16_t T = readTemp();
-        putU1(T >> 8);
-        putU1(T & 0xff);
+       // putU1(T >> 8);
+       // putU1(T & 0xff);
         mcpShutdown();
         __delay_ms(1000);
     }
