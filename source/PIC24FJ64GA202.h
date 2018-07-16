@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#define PIC24FJ64GA202
+#define PIC24FJ64GA202                      // PIC used for project
 #define XTAL_FREQ       8000000UL           // Raw oscillator freq
 #define FCY             XTAL_FREQ / 2       // Most but not all PIC24s
     
