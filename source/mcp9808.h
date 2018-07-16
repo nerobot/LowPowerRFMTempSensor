@@ -8,9 +8,11 @@
 #ifndef MCP9808_H
 #define	MCP9808_H
 
-//#define XTAL_FREQ       8000000UL    // Raw oscillator freq
-#define FCY             XTAL_FREQ / 2       // Most but not all PIC24s
-//#define BUS_FRQ         1000L        // 1kHz
+#define FCY                             XTAL_FREQ / 2       // Most but not all PIC24s
+
+#include <xc.h> // include processor files - each processor file is guarded.
+#include "I2Clib.h"
+#include <libpic30.h>
 
 #define MCP9808_I2CADDR_DEFAULT        0x18
 #define MCP9808_REG_CONFIG             0x01
@@ -32,20 +34,11 @@
 #define MCP9808_REG_MANUF_ID           0x06
 #define MCP9808_REG_DEVICE_ID          0x07
 
-//#define USE_AND_OR 
-
-#include <xc.h> // include processor files - each processor file is guarded.
-#include "I2Clib.h"
-#include <libpic30.h>
-
 void mcpShutdown_wake( uint8_t sw_ID );     //! Wakes up or shuts-down the module dependig on sw_ID. Internal.
 void mcpShutdown(void);                     //! Puts the MCP module into shutdown mode
 void mcpWake(void);                         //! Wakes up the MCP module
 uint8_t initMCP();                          //! Initialise the MCP module
 uint16_t readTemp( void );                  //! Read the current temperature and return as a word (two bytes)
-float readTempC( void );                    //! Read the current temperature and return as a float
-//static void write16(uint8_t address, uint16_t data);
-//static uint16_t read16(uint8_t address);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

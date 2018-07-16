@@ -3,27 +3,6 @@
 #include "I2Clib.h"
 #include "uart1.h"
 
-//*************************************************************************
-// Set Sensor to Shutdown-State or wake up (Conf_Register BIT8)
-// 1= shutdown / 0= wake up
-//*************************************************************************
-//#define i2cStart()      i2c_start_condition()
-
-
-/*
-
-float readTempC( void )
-{
-  uint16_t t = read16(MCP9808_REG_AMBIENT_TEMP);
-
-  float temp = t & 0x0FFF;
-  temp /=  16.0;
-  if (t & 0x1000) temp -= 256;
-
-  return temp;
-}
-*/
-
 uint8_t initMCP(){
     if (i2c_receive_16bit_data(MCP9808_I2CADDR_DEFAULT, MCP9808_REG_MANUF_ID) != 0x0054) return 0;
     if (i2c_receive_16bit_data(MCP9808_I2CADDR_DEFAULT, MCP9808_REG_DEVICE_ID) != 0x0400) return 0;
