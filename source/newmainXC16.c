@@ -2,7 +2,7 @@
  * File:   newmainXC16.c
  * Author: scdag
  *
- * Created on 10 July 2018, 20:55
+ * Created on 16 July 2018
  */
 
 #include "PIC24FJ64GA202.h"
